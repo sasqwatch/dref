@@ -70,6 +70,8 @@ iptables.execute({
 /**
  * Import routes
  */
+
+/* v0 routes */
 import indexRouter from './routes/index'
 import logsRouter from './routes/logs'
 import scriptsRouter from './routes/scripts'
@@ -78,6 +80,9 @@ import iptablesRouter from './routes/iptables'
 import targetsRouter from './routes/targets'
 import checkpointRouter from './routes/checkpoint'
 import hangRouter from './routes/hang'
+
+/* v1 routes */
+import v1 from './routes/v1'
 
 /**
  * Set up app
@@ -98,7 +103,7 @@ app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-// routes
+// v0 routes
 app.use('/', indexRouter)
 app.use('/logs', logsRouter)
 app.use('/scripts', scriptsRouter)
@@ -107,6 +112,9 @@ app.use('/iptables', iptablesRouter)
 app.use('/targets', targetsRouter)
 app.use('/checkpoint', checkpointRouter)
 app.use('/hang', hangRouter)
+
+// v1 routes
+app.use('/v1', v1())
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
