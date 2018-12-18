@@ -5,9 +5,9 @@ export function postJSON (url, data, { headers, successCb, failCb, timeoutCb } =
 
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 400) {
-      typeof successCb === 'function' && successCb()
+      typeof successCb === 'function' && successCb(xhr.status, xhr.getAllResponseHeaders(), xhr.response)
     } else {
-      typeof failCb === 'function' && failCb()
+      typeof failCb === 'function' && failCb(xhr.status, xhr.getAllResponseHeaders(), xhr.response)
     }
   }
 
